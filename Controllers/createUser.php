@@ -6,10 +6,10 @@
  * Time: 1:33 AM
  */
 
-$servername = "xxxxx";
+$servername = "xxxx";
 $username = "xxxx";
-$password = "xxxx";
-$dbname = "xxxx";
+$password = "";
+$dbname = "xxxxx";
 
 $firstName = $_POST["fName"];
 $lastName = $_POST["lName"];
@@ -17,12 +17,15 @@ $email = $_POST["email"];
 $newUserPass = $_POST["pass"];
 $newUserConfPass = $_POST["confPass"];
 
+$error_message = "";
+$string_exp = "/^[A-Za-z0-9 .'-]+$/";
+
 if($newUserPass != $newUserConfPass){
-    echo "Password does not match";
+    die("Password does not match, Please try again");
 }
 
 else {
-    header('Location: ../Views/createAccount_page.html');
+
 
 //Create Connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -47,4 +50,7 @@ else {
 
     $conn->close();
     }
+
+    //Redirect
+    header('Location: ../Views/createAccount_page.html');
 ?>

@@ -1,3 +1,20 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alexgordon
+ * Date: 3/22/2015
+ * Time: 10:57 PM
+ */
+
+
+    session_start();
+
+    if($_SESSION['user_id'] == null){
+        header('Location: ../Views/homepage.html');
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -24,15 +41,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="homepage.html" class="navbar-brand">Compnay Name</a>
+                <a href="user_homepage.php" class="navbar-brand">Compnay Name</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="login_page.html">Login</a>
+                        <a href="#">Profile</a>
                     </li>
                     <li>
-                        <a href="createAccount_page.html">Create Account</a>
+                        <a href="../Controllers/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -41,29 +58,12 @@
     <!--Header-->
 
     <div class="container-fluid">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <h3 class="text-center">Sign in</h3>
-                </div>
-            </div>
-            <form action="../Controllers/loginAuth.php" method="post">
-                <div class="col-sm-4 col-sm-offset-4">
-                    <div class="form-group">
-                        <label for="email" class="control-label">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Email" autofocus class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="pass" class="control-label">Pasword</label>
-                        <input type="password" name="pass" id="pass" placeholder="Password" autofocus class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-block">
-                            Login
-                        </button>
-                    </div>
-                </div>
-            </form>
+        <?php
+            echo "<h3 class='text-center'>Welcome " . $_SESSION["firstName"] . " " . $_SESSION["lastName"]."</h3>";
+        ?>
+        <div class="row">
+            <h4 class="text-center">Please add to the <a href="../Views/forum.php">discussion</a>
+            </h4>
         </div>
     </div>
 
