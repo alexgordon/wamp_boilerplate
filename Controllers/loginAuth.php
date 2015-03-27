@@ -6,10 +6,10 @@
  * Time: 10:22 AM
  */
 
-$servername = "xxxx";
-$username = "xxxx";
+$servername = "localhost";
+$username = "root";
 $password = "";
-$dbname = "xxxxx";
+$dbname = "sandbox";
 
 $userPass = $_POST["pass"];
 $email = $_POST["email"];

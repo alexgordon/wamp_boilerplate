@@ -6,10 +6,10 @@
  * Time: 1:33 AM
  */
 
-$servername = "xxxx";
-$username = "xxxx";
+$servername = "localhost";
+$username = "root";
 $password = "";
-$dbname = "xxxxx";
+$dbname = "sandbox";
 
 $firstName = $_POST["fName"];
 $lastName = $_POST["lName"];
@@ -52,5 +52,5 @@ else {
     }
 
     //Redirect
-    header('Location: ../Views/createAccount_page.html');
+    header('Location: ../Views/login_page.html');
 ?>

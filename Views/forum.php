@@ -15,10 +15,10 @@ if($_SESSION['user_id'] == null){
 }
 
 else{
-    $servername = "xxxx";
-    $username = "xxxx";
+    $servername = "localhost";
+    $username = "root";
     $password = "";
-    $dbname = "xxxxx";
+    $dbname = "sandbox";
 
 //Create Connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -30,9 +30,20 @@ else{
     }
 
 //GET comments
-    $sql = "SELECT C.comment From commentstable C";
+    $sql = "SELECT C.comment, C.commentDate From commentstable C";
     $result = $conn->query($sql);
-    $rows = $result->fetch_array(MYSQL_ASSOC);
+    $resultArray = array();
+    $dateArray = array();
+    $counter = 0;
+    $x=0;
+    $y=1;
+    while($rows = $result->fetch_assoc()){
+     //   $resultArray[$rows['comment']][$counter] = $rows['comment'];
+     //   $dateArray[$rows['commentDate']][$counter] = $rows['commentDate'];
+        $resultArray[$x][$counter] = $rows['comment'];
+        $resultArray[$y][$counter] = $rows['commentDate'];
+        $counter++;
+    }
 
 }
 
@@ -80,16 +91,70 @@ else{
 </div>
 <!--Header-->
 
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="row">
         <h3 class="text-center">Discussion</h3>
     </div>
     <div class="row">
         <?php
-            echo "<p>" .$rows['comment']. "</p>";
-        ?>
+/*            foreach ($resultArray as $row) {
+                foreach ($row as $comment) {
+                    echo "<p>" . $comment . "</p>";
+                }
+            }
+        */?>
+    </div>
+    <div>
+        <form method="post" action="../Controllers/updateDiscussion.php">
+            <textarea name="comment" rows="5" class="autogrow"></textarea>
+            <input type="submit">
+        </form>
+    </div>
+</div>-->
+
+<!--Disccussion-->
+<div class="detailBox">
+    <div class="titleBox text-center">
+        <label>Comment Box</label>
+        <button type="button" class="close" aria-hidden="true">&times;</button>
+    </div>
+    <div class="commentBox">
+
+        <p class="taskDescription">Please write your comments about how you like this boilerplate website.</p>
+    </div>
+    <div class="actionBox">
+        <ul class="commentList">
+            <?php
+            //foreach ($resultArray as $row) {
+              //  foreach ($row as $comment) {
+            for($i=0; $i<$counter; $i++){
+                    //echo "<p>" . $comment . "</p>";
+                    echo "<li>".
+                    "<div class='commenterImage'>".
+                        "<img src='http://cdn.flaticon.com/png/256/24029.png' />".
+                    "</div>".
+                    "<div class='commentText'>".
+                        "<p>".$resultArray[0][$i]."</p>"."<span class='date sub-text'>".$resultArray[1][$i]."</span>".
+
+                    "</div>".
+                "</li>";
+                }
+
+            ?>
+        </ul>
+
+        <form method="post" action="../Controllers/updateDiscussion.php" class="form-inline">
+            <div class="form-group">
+                <input class="form-control" name="comment" type="text" placeholder="Your comments" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Add</button>
+            </div>
+        </form>
     </div>
 </div>
+
+<!---->
 
 <!--Footer-->
 <footer>
